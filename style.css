@@ -1,5 +1,5 @@
 .menu {
-    --s: 50px; /* control the size */
+    --s: 30px; /* control the size */
     --c: black; /* the color */
     
     height: var(--s);
