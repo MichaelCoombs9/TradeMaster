@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TradeMaster</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <!-- Favicon for standard browsers -->
 <link rel="icon" type="image/png" sizes="32x32" href="images/circleLogo.png">
 <link rel="icon" type="image/png" sizes="16x16" href="images/circleLogo.png">
@@ -20,7 +21,7 @@
 <meta name="theme-color" content="#ffffff">
 
 </head>
-<body class="bg-blue-100">
+<body class="bg-blue-100 m-0">
 
 <!-- Navigation -->
 <nav class="bg-white p-4">
@@ -33,7 +34,7 @@
         <!-- Mobile menu button -->
         <div class="md:hidden">
             <button id="mobileMenuButton" class="text-black focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <input type="checkbox" role="button" aria-label="Display the menu" class="menu">
             </button>
         </div>
     </div>
