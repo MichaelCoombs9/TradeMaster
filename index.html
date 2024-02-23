@@ -60,7 +60,13 @@
                 </div>
                 <div class="p-4 mx-auto max-w-2xl">
                     <!-- Your Team 1 input field here --> 
-                    <input type="text" placeholder="Search for a player" class="w-full p-2 border border-gray-300 rounded-md">
+                    <input type="text" id="playerSearchTeam1" placeholder="Search for a player" class="w-full p-2 border border-gray-300 rounded-md">
+                    <div id="selected-playersTeam1">
+                        <!-- Selected players will be added here -->
+                      </div>                      
+                    <div class="absolute left-0 right-0 mt-1 z-10 bg-gray-800 border border-gray-600 rounded-md shadow-lg overflow-hidden mx-auto max-w-2xl" id="suggestionBoxTeam1" style="display: none;">
+                        <!-- Suggestions will be dynamically inserted here -->
+                    </div>
                 </div> 
             </div> 
             <!-- Team 2 -->
@@ -69,10 +75,16 @@
                     <p class="font-bold text-white text-lg">Team 2</p>
                 </div>
                 <div class="p-4 mx-auto max-w-2xl">
-                    <!-- Your Team 2 input field here -->
-                    <input type="text" placeholder="Search for a player" class="w-full p-2 border border-gray-300 rounded-md">
-                </div>
-            </div>
+                    <!-- Your Team 2 input field here --> 
+                    <input type="text" id="playerSearchTeam2" placeholder="Search for a player" class="w-full p-2 border border-gray-300 rounded-md">
+                    <div id="selected-playersTeam2">
+                        <!-- Selected players will be added here -->
+                      </div>                      
+                    <div class="absolute left-0 right-0 mt-1 z-10 bg-gray-800 border border-gray-600 rounded-md shadow-lg overflow-hidden mx-auto max-w-2xl" id="suggestionBoxTeam2" style="display: none;">
+                        <!-- Suggestions will be dynamically inserted here -->
+                    </div>
+                </div> 
+            </div> 
             <!-- Team 3 (initially hidden) --> 
             <div id="team3Section" class="hidden">
                 <div class="bg-gray-600 text-center rounded py-2 mx-auto max-w-2xl">
