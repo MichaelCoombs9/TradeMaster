@@ -43,25 +43,34 @@ function handleInput(e) {
 
 // Update the displaySuggestions function to accept the id of the input field
 function displaySuggestions(filteredPlayers, inputId) {
-  // Determine which suggestion box and selected players div to use based on the input ID
-  const suffix = inputId === 'playerSearchTeam1' ? 'Team1' : 'Team2';
-  const suggestionBox = document.getElementById(`suggestionBox${suffix}`);
-  const selectedPlayersDiv = document.getElementById(`selected-players${suffix}`);
-
-    filteredPlayers.forEach(player => {
+    // Get the input element by its ID to check its value
+    const inputElement = document.getElementById(inputId); // Define inputElement at the beginning
+  
+    // Determine which suggestion box and selected players div to use based on the input ID
+    const suffix = inputId === 'playerSearchTeam1' ? 'Team1' : 'Team2';
+    const suggestionBox = document.getElementById(`suggestionBox${suffix}`);
+      // Ensure this ID matches your HTML structure for where selected players are displayed
+    const selectedPlayersDiv = document.getElementById(`selected-players${suffix}`);
+  
+    // Now inputElement is defined and can be used to check its value
+    if (filteredPlayers.length === 0 || inputElement.value === '') {
+      suggestionBox.style.display = 'none';
+    } else {
+      suggestionBox.innerHTML = ''; // Clear existing suggestions first
+      filteredPlayers.slice(0, 5).forEach(player => { 
         const suggestionElement = document.createElement('div');
         suggestionElement.className = 'p-2 hover:bg-gray-600 cursor-pointer text-white';
         suggestionElement.textContent = player.playerName;
         suggestionElement.onclick = () => {
-            handlePlayerSelection(player, selectedPlayersDiv); // Pass the correct div for the selected team
-            suggestionBox.innerHTML = '';
-            suggestionBox.style.display = 'none';
-            document.getElementById(inputId).value = ''; // Empty the correct text field
-          };
+            handlePlayerSelection(player, selectedPlayersDiv); // Make sure this is correctly referencing the div where selected players should be added.
+            suggestionBox.style.display = 'none'; // Hide suggestions box
+            inputElement.value = ''; // Optionally clear the input field if desired
+          };          
         suggestionBox.appendChild(suggestionElement);
-    }); 
-        suggestionBox.style.display = 'block';
+      });
+      suggestionBox.style.display = 'block';
     }
+  }  
 
 // Function to handle player selection and display
 function handlePlayerSelection(player, selectedPlayersDiv) {
@@ -115,6 +124,7 @@ function handlePlayerSelection(player, selectedPlayersDiv) {
   }
 
 
+
 //   3 TEAM OPTION
 // First, define a function to show the modal
 function showComingSoonModal() {
@@ -136,7 +146,6 @@ function showComingSoonModal() {
     // Now add the event listener to the button
     document.getElementById('modal-ok-button').addEventListener('click', closeComingSoonModal);
   }
-  
   // Define a function to close the modal and revert the radio button selection
   function closeComingSoonModal() {
     const modal = document.getElementById('comingSoonModal');
@@ -149,11 +158,9 @@ function showComingSoonModal() {
   const team3Section = document.getElementById('team3Section');
   team3Section.classList.add('hidden');
     }
-  
     // Revert the radio button selection to two teams
     document.querySelector('input[name="teamCount"][value="2"]').checked = true;
-  }
-  
+  }  
   // Update the event listener for the radio buttons
   document.querySelectorAll('input[name="teamCount"]').forEach(input => {
       input.addEventListener('change', (event) => {
