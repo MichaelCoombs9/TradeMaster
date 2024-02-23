@@ -205,6 +205,31 @@ function showComingSoonModal() {
           }
       });
   });
+
+//   INFO MODAL
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get the modal and button elements
+    const infoButton = document.getElementById('infoButton');
+    const infoModal = document.getElementById('infoModal');
+    const closeModal = document.getElementById('closeModal');
+  
+    // Function to open the modal
+    function openModal() {
+      infoModal.classList.remove('hidden');
+    }
+  
+    // Function to close the modal
+    function closeModalFunc() {
+      infoModal.classList.add('hidden');
+    }
+  
+    // Event listener for the info button
+    infoButton.addEventListener('click', openModal);
+  
+    // Event listener for the close button
+    closeModal.addEventListener('click', closeModalFunc);
+  });
+  
    
   
 
