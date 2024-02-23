@@ -1,4 +1,6 @@
 import teData from './TE_Rankings.js';
+import qbData from './QB_Rankings.js';
+
 
 
 // WELCOME MODAL
@@ -33,13 +35,19 @@ document.getElementById('playerSearchTeam1').addEventListener('input', handleInp
 document.getElementById('playerSearchTeam2').addEventListener('input', handleInput);
 
 // Handle input for both fields
-function handleInput(e) {
-  const userInput = e.target.value.toLowerCase();
-  const filteredPlayers = teData.filter(player => player.playerName.toLowerCase().includes(userInput));
-
-  // Pass the id of the input field to displaySuggestions to know which suggestions box to show
-  displaySuggestions(filteredPlayers, e.target.id);
-}
+// This function is called when the user types into the search field
+function handleInput(event) {
+    const userInput = event.target.value.toLowerCase();
+    const filteredTEPlayers = teData.filter(player => 
+      player.playerName.toLowerCase().includes(userInput)
+    );
+    const filteredQBPlayers = qbData.filter(player => 
+      player.playerName.toLowerCase().includes(userInput)
+    );
+    // Combine TE and QB suggestions
+    const filteredPlayers = [...filteredTEPlayers, ...filteredQBPlayers];
+    displaySuggestions(filteredPlayers, event.target.id);
+  }  
 
 // Update the displaySuggestions function to accept the id of the input field
 function displaySuggestions(filteredPlayers, inputId) {
