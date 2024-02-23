@@ -97,8 +97,8 @@ function handlePlayerSelection(player, selectedPlayersDiv) {
     playerValue.textContent = player.value;
   
     const removeButton = document.createElement('button');
-    removeButton.className = 'bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded';
-    removeButton.textContent = 'X';
+    removeButton.className = 'bg-red-500 hover:bg-red-400 text-white font-bold py-1 px-2 rounded';
+    removeButton.textContent = 'X'; 
     removeButton.onclick = function() { 
       selectedPlayersDiv.removeChild(playerWrapper);
     };
@@ -114,6 +114,59 @@ function handlePlayerSelection(player, selectedPlayersDiv) {
     selectedPlayersDiv.appendChild(playerWrapper);
   }
 
+
+//   3 TEAM OPTION
+// First, define a function to show the modal
+function showComingSoonModal() {
+    // Create your modal element or get it if it's already in the HTML
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 bg-gray-900 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center';
+    modal.id = 'comingSoonModal';
+    modal.innerHTML = `
+    <div class="bg-white p-6 rounded shadow-md text-center">
+    <h2 class="text-lg font-bold mb-2">Comming Soon!</h2>
+    <p>3-Way trades are under developement,</p>\n<p>and will be available soon.</p>
+    <button id="modal-ok-button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Close</button>
+  </div>  
+    `;
+  
+    // Append the modal to the body
+    document.body.appendChild(modal);
+  
+    // Now add the event listener to the button
+    document.getElementById('modal-ok-button').addEventListener('click', closeComingSoonModal);
+  }
+  
+  // Define a function to close the modal and revert the radio button selection
+  function closeComingSoonModal() {
+    const modal = document.getElementById('comingSoonModal');
+    if (modal) {
+      modal.remove();
+
+        // Revert the radio button selection to two teams
+  document.querySelector('input[name="teamCount"][value="2"]').checked = true;
+  // Directly call the logic to hide the team 3 section
+  const team3Section = document.getElementById('team3Section');
+  team3Section.classList.add('hidden');
+    }
+  
+    // Revert the radio button selection to two teams
+    document.querySelector('input[name="teamCount"][value="2"]').checked = true;
+  }
+  
+  // Update the event listener for the radio buttons
+  document.querySelectorAll('input[name="teamCount"]').forEach(input => {
+      input.addEventListener('change', (event) => {
+          if (event.target.value === '3') {
+              // Show the coming soon modal
+              showComingSoonModal();
+          } else {
+              const team3Section = document.getElementById('team3Section');
+              team3Section.classList.add('hidden'); // Hide Team 3 section if it's not hidden already
+          }
+      });
+  });
+   
   
 
 
