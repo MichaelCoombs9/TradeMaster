@@ -137,7 +137,7 @@ function handlePlayerSelection(player, selectedPlayersDiv) {
       charCountElement.textContent = remainingChars;
   
       // Change border color based on the character count
-      if(remainingChars < 50) {
+      if(remainingChars < 1) {
         commentBox.classList.remove('border-green-500');
         commentBox.classList.add('border-red-500');
       } else {
