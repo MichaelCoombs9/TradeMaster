@@ -43,7 +43,7 @@
         <div class="flex items-center justify-center space-x-2">
             <!-- Radio Buttons for Team Selection -->
             <label class="inline-flex items-center">
-                <input type="radio" class="form-radio" name="teamCount" value="2" checked>
+                <input type="radio" class="form-radio " name="teamCount" value="2" checked>
                 <span class="ml-2">2 Teams</span>
             </label>
             <label class="inline-flex items-center">
@@ -58,7 +58,7 @@
                 <div class="bg-gray-600 text-center rounded py-2 mx-auto max-w-2xl">
                     <p class="font-bold text-white text-lg">Team 1</p>
                 </div>
-                <div class="p-4 mx-auto max-w-2xl">
+                <div class="py-4 mx-auto max-w-2xl">
                     <!-- Your Team 1 input field here --> 
                     <input type="text" id="playerSearchTeam1" placeholder="Search for a player" class="w-full p-2 border border-gray-300 rounded-md">
                     <div id="selected-playersTeam1">
@@ -74,7 +74,7 @@
                 <div class="bg-gray-600 text-center rounded py-2 mx-auto max-w-2xl">
                     <p class="font-bold text-white text-lg">Team 2</p>
                 </div>
-                <div class="p-4 mx-auto max-w-2xl">
+                <div class="py-4 mx-auto max-w-2xl">
                     <!-- Your Team 2 input field here --> 
                     <input type="text" id="playerSearchTeam2" placeholder="Search for a player" class="w-full p-2 border border-gray-300 rounded-md">
                     <div id="selected-playersTeam2">
@@ -90,12 +90,19 @@
                 <div class="bg-gray-600 text-center rounded py-2 mx-auto max-w-2xl">
                     <p class="font-bold text-white text-lg">Team 3</p>
                 </div>
-                <div class="p-4 mx-auto max-w-2xl"> 
+                <div class="py-4 mx-auto max-w-2xl"> 
                     <!-- Your Team 3 input field here -->
                     <input type="text" placeholder="Search for a player" class="w-full p-2 border border-gray-300 rounded-md">
                 </div>
             </div>
 
+            <!-- TEXT INPUT BOX -->
+            <div class="relative my-4 mx-auto w-full max-w-2xl">
+                <textarea id="commentBox" class="w-full p-2 border-2 rounded-md focus:border-green-500 focus:ring-0" placeholder="Your comments..." maxlength="300"></textarea>
+                <div id="charCount" class="absolute right-3 bottom-3 text-sm text-gray-500">300</div>
+            </div>
+                         
+    
         
         <!-- Submit Button -->
         <div class="mx-auto max-w-2xl">

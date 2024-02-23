@@ -124,6 +124,30 @@ function handlePlayerSelection(player, selectedPlayersDiv) {
   }
 
 
+//   INPUT BOX
+  document.addEventListener('DOMContentLoaded', () => {
+    const commentBox = document.getElementById('commentBox');
+    const charCountElement = document.getElementById('charCount');
+  
+    // Initialize the character count on page load
+    charCountElement.textContent = '300';
+  
+    commentBox.addEventListener('input', function() {
+      const remainingChars = 300 - this.value.length;
+      charCountElement.textContent = remainingChars;
+  
+      // Change border color based on the character count
+      if(remainingChars < 50) {
+        commentBox.classList.remove('border-green-500');
+        commentBox.classList.add('border-red-500');
+      } else {
+        commentBox.classList.remove('border-red-500');
+        commentBox.classList.add('border-green-500');
+      }
+    });
+  });
+  
+
 
 //   3 TEAM OPTION
 // First, define a function to show the modal
