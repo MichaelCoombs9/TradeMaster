@@ -2,10 +2,11 @@
   "name": "trademaster",
   "version": "1.0.0",
   "description": "A web application for analyzing football trades.",
+  "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -16,16 +17,15 @@
     "trade",
     "analysis"
   ],
-  "author": "Michael Coombs",
+  "author": "",
   "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "openai": "^4.28.0"
+  },
   "bugs": {
     "url": "https://github.com/MichaelCoombs9/TradeMaster/issues"
   },
-  "homepage": "https://github.com/MichaelCoombs9/TradeMaster#readme",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.18.2",
-    "node-fetch": "^2.7.0"
-  }
+  "homepage": "https://github.com/MichaelCoombs9/TradeMaster#readme"
 }

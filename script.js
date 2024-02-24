@@ -2,7 +2,6 @@ import teData from './TE_Rankings.js';
 import qbData from './QB_Rankings.js';
 import wrData from './WR_Rankings.js';
 import rbData from './RB_Rankings.js';
-import fetchGPTResponse from './gpt.js';
 
 let selectedPlayersData = {
     Team1: [],
@@ -261,13 +260,34 @@ function collectFormData() {
         userInput
     };
 }
- 
-document.getElementById('tradeForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+
+function sendData() {
     const formData = collectFormData();
-    const gptResponse = await fetchGPTResponse(formData);
-    // Display the GPT response in your page
-    console.log(gptResponse); // For demonstration, replace with actual display logic
+
+    fetch('/submit-form', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        // Process the response data here
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+ 
+document.addEventListener('DOMContentLoaded', (event) => {
+    const form = document.getElementById('tradeForm');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent the default form submission
+        sendData();
+    });
 });
 
 
