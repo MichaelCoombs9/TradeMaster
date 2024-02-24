@@ -1,11 +1,19 @@
 export default async function fetchGPTResponse(formData) {
-    const response = await fetch('https://trade-master-9a80f6716536.herokuapp.com/api/gpt', {
+    // Point to your local server endpoint
+    const localEndpoint = 'http://localhost:3000/api/gpt';
+    
+    const response = await fetch(localEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
     });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     const data = await response.json();
     return data;
 }
