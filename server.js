@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-app.use(cors());
- 
+
 const app = express();
+app.use(cors()); // This line enables CORS middleware
 
 // Correct port variable used
 const PORT = process.env.PORT || 3000;
