@@ -4,8 +4,10 @@ import wrData from './WR_Rankings.js';
 import rbData from './RB_Rankings.js';
 import fetchGPTResponse from './gpt.js';
 
-
-
+let selectedPlayersData = {
+    Team1: [],
+    Team2: []
+};
 
 // WELCOME MODAL
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -92,6 +94,10 @@ function displaySuggestions(filteredPlayers, inputId) {
 
 // Function to handle player selection and display
 function handlePlayerSelection(player, selectedPlayersDiv) {
+
+    // Add the full player object to the selectedPlayersData array
+    const teamSuffix = selectedPlayersDiv.id.endsWith('Team1') ? 'Team1' : 'Team2';
+    selectedPlayersData[teamSuffix].push(player);
 
     // Create the wrapper for the selected player
     const playerWrapper = document.createElement('div');
@@ -243,18 +249,19 @@ function showComingSoonModal() {
 
 // FORM DATA COLLECTION
 function collectFormData() {
-    // Assuming you have elements that list selected players for both teams
-    const selectedPlayersTeam1 = [...document.querySelectorAll('#selected-playersTeam1 .player-name')].map(el => el.textContent);
-    const selectedPlayersTeam2 = [...document.querySelectorAll('#selected-playersTeam2 .player-name')].map(el => el.textContent);
     const userInput = document.getElementById('commentBox').value;
-    console.log(selectedPlayersTeam1, selectedPlayersTeam2, userInput);
+
+    // Convert selected players data to JSON for submission
+    const selectedPlayersTeam1JSON = JSON.stringify(selectedPlayersData.Team1);
+    const selectedPlayersTeam2JSON = JSON.stringify(selectedPlayersData.Team2);
+
     return {
-        team1: selectedPlayersTeam1,
-        team2: selectedPlayersTeam2,
+        selectedPlayersTeam1: selectedPlayersTeam1JSON,
+        selectedPlayersTeam2: selectedPlayersTeam2JSON,
         userInput
     };
 }
-
+ 
 document.getElementById('tradeForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const formData = collectFormData();

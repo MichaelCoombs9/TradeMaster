@@ -1,14 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
+const cors = require('cors'); // Include CORS package
 require('dotenv').config(); // Make sure to load the environment variables
 
 const app = express();
 const PORT = 3000; // You can set this directly if you're only using it locally
 
+app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json());
  
 app.post('/api/gpt', async (req, res) => {
+    console.log(req.body); // This should show the structure of the formData
     const { model, prompt, max_tokens } = req.body;
 
     try {
