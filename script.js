@@ -1,5 +1,7 @@
 import teData from './TE_Rankings.js';
 import qbData from './QB_Rankings.js';
+import wrData from './WR_Rankings.js';
+import rbData from './RB_Rankings.js';
 
 
 
@@ -44,8 +46,14 @@ function handleInput(event) {
     const filteredQBPlayers = qbData.filter(player => 
       player.playerName.toLowerCase().includes(userInput)
     );
+    const filteredWRPlayers = wrData.filter(player => 
+        player.playerName.toLowerCase().includes(userInput)
+      );
+      const filteredRBPlayers = rbData.filter(player => 
+        player.playerName.toLowerCase().includes(userInput)
+      );
     // Combine TE and QB suggestions
-    const filteredPlayers = [...filteredTEPlayers, ...filteredQBPlayers];
+    const filteredPlayers = [...filteredTEPlayers, ...filteredQBPlayers,...filteredWRPlayers,...filteredRBPlayers];
     displaySuggestions(filteredPlayers, event.target.id);
   }  
 
