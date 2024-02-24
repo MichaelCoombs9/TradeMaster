@@ -17,7 +17,7 @@ app.post('/api/gpt', async (req, res) => {
 
     const { model, prompt, max_tokens } = req.body;
 
-    const response = await fetch('https://api.openai.com/v1/completions', {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -28,12 +28,10 @@ app.post('/api/gpt', async (req, res) => {
             prompt: prompt,
             max_tokens: max_tokens || 100,
         }),
-    });
+    }); 
     const gptResponse = await response.json();
     res.json(gptResponse);
 });
-
-// Remove the redundant app.listen call
 
 // Correct usage of PORT variable
 app.listen(PORT, () => {
