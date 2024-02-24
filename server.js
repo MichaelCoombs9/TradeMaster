@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 
@@ -34,11 +35,10 @@ app.post('/api/gpt', async (req, res) => {
 });
 
 
-app.use(express.static('public'));
-
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/index.html'));
-});
+    // Make sure you require the 'path' module at the top of your file
+    res.sendFile(path.join(__dirname, 'index.html'));
+}); 
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
