@@ -1,7 +1,5 @@
-
-
 export default async function fetchGPTResponse(formData) {
-    const response = await fetch('https://trade-master.herokuapp.com/api/gpt', {
+    const response = await fetch('https://trade-master-9a80f6716536.herokuapp.com/api/gpt', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
