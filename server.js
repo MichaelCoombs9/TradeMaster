@@ -33,6 +33,13 @@ app.post('/api/gpt', async (req, res) => {
     res.json(gptResponse);
 });
 
+
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
