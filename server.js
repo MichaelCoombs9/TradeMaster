@@ -13,23 +13,20 @@ app.use(bodyParser.json());
 
 // Define the endpoint '/api/gpt'
 app.post('/api/gpt', async (req, res) => {
-    // Dynamically import node-fetch only if necessary. If you're using a version of Node that supports top-level await, you can keep this.
-    // Otherwise, consider requiring node-fetch at the top if you're consistently encountering issues with dynamic imports.
-    const fetch = (await import('node-fetch')).default;
+    const fetch = require('node-fetch'); // Require node-fetch here
 
-    const { model, prompt, max_tokens } = req.body; // Assuming you're sending these details from the client
+    const { model, prompt, max_tokens } = req.body;
 
     const response = await fetch('https://api.openai.com/v1/completions', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // Make sure to use an environment variable for your API key, not hardcode it
-            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}` // Accessing the API key from environment variables
         },
         body: JSON.stringify({
-            model: model || "text-davinci-002", // Default model if not specified
-            prompt: prompt, // Use the prompt from the request
-            max_tokens: max_tokens || 100, // Default max_tokens if not specified
+            model: model || "text-davinci-002",
+            prompt: prompt,
+            max_tokens: max_tokens || 100,
         }),
     });
     const gptResponse = await response.json();
