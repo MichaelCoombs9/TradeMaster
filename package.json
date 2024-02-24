@@ -1,17 +1,22 @@
 {
   "name": "trademaster",
   "version": "1.0.0",
-  "description": "",
-  "main": "QB_Rankings.js",
+  "description": "A web application for analyzing football trades.",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MichaelCoombs9/TradeMaster.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "football",
+    "trade",
+    "analysis"
+  ],
+  "author": "Michael Coombs",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MichaelCoombs9/TradeMaster/issues"
@@ -21,4 +26,4 @@
     "express": "^4.18.2",
     "node-fetch": "^2.7.0"
   }
-}
+} 
