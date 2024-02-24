@@ -1,39 +1,38 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const fetch = require('node-fetch');
 
 const app = express();
-app.use(cors()); // This line enables CORS middleware
-
-// Correct port variable used
 const PORT = process.env.PORT || 3000;
 
-// Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
-// Define the endpoint '/api/gpt'
 app.post('/api/gpt', async (req, res) => {
-    const fetch = require('node-fetch'); // Require node-fetch here
-
     const { model, prompt, max_tokens } = req.body;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}` // Accessing the API key from environment variables
+            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
         },
         body: JSON.stringify({
-            model: model || "gpt-4",
-            prompt: prompt,
+            model: model || "gpt-3.5-turbo",
+            messages: [
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
             max_tokens: max_tokens || 100,
+            temperature: 0.7
         }),
-    }); 
+    });
+
     const gptResponse = await response.json();
     res.json(gptResponse);
 });
 
-// Correct usage of PORT variable
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
