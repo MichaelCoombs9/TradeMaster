@@ -2,6 +2,8 @@ import teData from './TE_Rankings.js';
 import qbData from './QB_Rankings.js';
 import wrData from './WR_Rankings.js';
 import rbData from './RB_Rankings.js';
+import fetchGPTResponse from './gpt.js';
+
 
 
 
@@ -237,6 +239,31 @@ function showComingSoonModal() {
     // Event listener for the close button
     closeModal.addEventListener('click', closeModalFunc);
   });
+
+
+// FORM DATA COLLECTION
+function collectFormData() {
+    // Assuming you have elements that list selected players for both teams
+    const selectedPlayersTeam1 = [...document.querySelectorAll('#selected-playersTeam1 .player-name')].map(el => el.textContent);
+    const selectedPlayersTeam2 = [...document.querySelectorAll('#selected-playersTeam2 .player-name')].map(el => el.textContent);
+    const userInput = document.getElementById('commentBox').value;
+    console.log(selectedPlayersTeam1, selectedPlayersTeam2, userInput);
+    return {
+        team1: selectedPlayersTeam1,
+        team2: selectedPlayersTeam2,
+        userInput
+    };
+}
+
+document.getElementById('tradeForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = collectFormData();
+    const gptResponse = await fetchGPTResponse(formData);
+    // Display the GPT response in your page
+    console.log(gptResponse); // For demonstration, replace with actual display logic
+});
+
+
   
    
   
