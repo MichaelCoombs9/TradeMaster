@@ -24,7 +24,7 @@ app.post('/api/gpt', async (req, res) => {
             'Authorization': `Bearer ${process.env.OPENAI_API_KEY}` // Accessing the API key from environment variables
         },
         body: JSON.stringify({
-            model: model || "text-davinci-002",
+            model: model || "gpt-4",
             prompt: prompt,
             max_tokens: max_tokens || 100,
         }),
