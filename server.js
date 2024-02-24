@@ -20,7 +20,7 @@ app.post('/submit-form', async (req, res) => {
   try {
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: userInput }],
+      messages: [{ role: "user", content: "Team 1: " + selectedPlayersTeam1 + ", Team 2: " + selectedPlayersTeam2 + " Trade Insight: " + userInput }],
     });
 
     console.log(completion.choices[0].message.content);
