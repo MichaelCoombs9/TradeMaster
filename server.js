@@ -1,11 +1,15 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import path from 'path';
 import OpenAI from 'openai';
 import { config } from 'dotenv';
 config();
 
 const app = express();
-const port = 3000; // You can use any port that's free on your system
+const port = process.env.PORT || 3000; // Use the PORT environment variable if it's set
+
+// Serve static files from the public_html directory
+app.use(express.static(path.join(__dirname, '../public_html')));
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -16,7 +20,6 @@ const openai = new OpenAI({
 
 app.post('/submit-form', async (req, res) => {
   const { selectedPlayersTeam1, selectedPlayersTeam2, userInput } = req.body;
-  // Assuming `userInput` is what you want to send to OpenAI
   try {
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
