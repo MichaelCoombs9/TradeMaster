@@ -248,54 +248,66 @@ function showComingSoonModal() {
 
 // FORM DATA COLLECTION
 function collectFormData() {
+    // Assuming selectedPlayersData is structured as { Team1: [...players], Team2: [...players] }
+    // And each player object has a 'playerName' property
+    let team1PlayerNames = selectedPlayersData.Team1.map(player => player.playerName);
+    let team2PlayerNames = selectedPlayersData.Team2.map(player => player.playerName);
+
     const userInput = document.getElementById('commentBox').value;
 
-    // Convert selected players data to JSON for submission
-    const selectedPlayersTeam1JSON = JSON.stringify(selectedPlayersData.Team1);
-    const selectedPlayersTeam2JSON = JSON.stringify(selectedPlayersData.Team2);
-
-    return {
-        selectedPlayersTeam1: selectedPlayersTeam1JSON,
-        selectedPlayersTeam2: selectedPlayersTeam2JSON,
-        userInput
+    // Create an object with both teams' player names and the user input
+    const formData = {
+        team1Players: team1PlayerNames,
+        team2Players: team2PlayerNames,
+        userInput: userInput,
     };
+
+    return JSON.stringify(formData); // Convert the object to a JSON string for sending
 }
 
-function sendData() {
-    const formData = collectFormData();
 
-    fetch('/submit-form', {
+//  FORM DATA TO ZAPIER
+document.getElementById('tradeForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the form from submitting the traditional way
+
+    // Create a FormData object, passing in the form
+ /*   var formData = new FormData(this);*/
+    var formData = collectFormData();
+
+    // Use the Fetch API to send the form data
+    fetch("https://hooks.zapier.com/hooks/catch/18050667/3evx7w9/", {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: formData // FormData object will be correctly interpreted by Fetch
     })
-    .then(response => response.json())
+    .then(response => {
+        if (response.ok) {
+            alert('Form Submitted Successfully');
+            return response.json(); // or response.text() if the response is not JSON
+        } else {
+            throw new Error('Network response was not ok.');
+        }
+    })
     .then(data => {
-        console.log('Success:', data);
-        // Process the response data here
+        console.log(data); // Process success response
     })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
- 
-document.addEventListener('DOMContentLoaded', (event) => {
-    const form = document.getElementById('tradeForm');
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent the default form submission
-        sendData();
+    .catch(error => {
+        console.error('An error occurred:', error);
+        alert('An error occurred');
     });
 });
 
+// RECIEVING RESPONSE FROM SERVER.CJS
+const eventSource = new EventSource('/events');
 
+eventSource.onmessage = function(event) {
+  const data = JSON.parse(event.data);
+  const evaluationResultsDiv = document.getElementById('tradeEvaluationResults');
+  const evaluationMessageParagraph = document.getElementById('evaluationMessage');
+
+  // Use the data to update the UI
+  console.log('Update from server:', data);
+  evaluationMessageParagraph.textContent = data.message;
   
-   
-  
-
-
-
-
-    
+  // Make the trade evaluation results visible
+  evaluationResultsDiv.classList.remove('hidden');
+};

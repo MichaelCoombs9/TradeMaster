@@ -40,7 +40,7 @@
 <!-- FORM START -->
  <div id="form-div" class="p-4">
     <h2 class="text-2xl font-bold text-center">Team Selection</h2>
-    <form id="tradeForm" class="space-y-4">
+    <form id="tradeForm" action="https://hooks.zapier.com/hooks/catch/18050667/3evx7w9/" method="POST" class="space-y-4">
         <div class="flex items-center justify-center space-x-2">
             <!-- Radio Buttons for Team Selection -->
             <label class="inline-flex items-center">
@@ -116,6 +116,16 @@
 </div>
 <!-- FORM END -->
 
+<!-- Trade Evaluation Results START -->
+<div id="tradeEvaluationResults" class="hidden mt-4 p-4 bg-white rounded-lg shadow-lg mx-auto max-w-4xl">
+    <div class="text-center">
+        <h2 class="text-2xl font-bold text-blue-500 mb-2">Trade Evaluation</h2>
+        <p id="evaluationMessage" class="text-gray-700 text-lg"></p>
+    </div>
+</div>
+<!-- Trade Evaluation Results END -->
+
+
 </main>
 <!-- MAN END -->
 
@@ -181,4 +191,4 @@
 </body>
 <!-- BODY END -->
 <script src="script.js" type="module"></script>
-</html>
+</html> 
